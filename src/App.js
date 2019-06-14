@@ -1,6 +1,9 @@
 import React from "react"
 import "./components/TodoComponents/Todo.css"
 
+import TodoList from "./components/TodoComponents/TodoList"
+import TodoForm from "./components/TodoComponents/TodoForm"
+
 const todos = [
     {
         task: "Organize Garage",
@@ -22,14 +25,34 @@ class App extends React.Component {
         }
     }
 
+    addTodo = todo => {
+        let newTodo = {
+            task: todo,
+            id: Date.now(),
+            completed: false,
+        }
+    }
+
     render() {
+        if (this.state.todos.length < 1) {
+            return (
+                <div className='App'>
+                    <div className='header'>
+                        <h1>My fantastic To Do List!</h1>
+                        <TodoForm addTodo={this.addTodo} />
+                    </div>
+                    <h2>Add a To Do Task!</h2>
+                </div>
+            )
+        }
+
         return (
             <div className='App'>
                 <div className='header'>
                     <h2>Welcome My Fantastic To DO List!</h2>
-                    {/* <TodoForm /> */}
+                    <TodoForm />
                 </div>
-                {/* <TodoList /> */}
+                <TodoList />
                 <div>
                     <button>Enter To Do</button>
                 </div>
